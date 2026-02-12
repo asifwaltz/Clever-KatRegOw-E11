@@ -23,7 +23,7 @@ print("Found PM2.5 sensor, reading data :3...")
 now = time.time()
 val = 0
 duration = 30 #seconds it runs for
-while (now < now + duration):
+while (time.time() < now + duration):
     time.sleep(1)
     
     try:
@@ -56,6 +56,7 @@ while (now < now + duration):
     print("----------------------------------------")
 
 for i in range(duration):
-    csvwrt.writerow([now, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]])
+    nownow = time.time()
+    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]])
 
 file.close()
