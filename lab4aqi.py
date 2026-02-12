@@ -57,6 +57,6 @@ while (time.time() < now + duration):
 
 for i in range(duration):
     nownow = time.time()
-    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]])
+    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]) #values not being recorded 
 
 file.close()
