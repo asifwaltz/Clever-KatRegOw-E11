@@ -5,7 +5,7 @@ from digitalio import DigitalInOut, Direction, Pull
 import csv
 import numpy as np
 
-file = open("test.csv", "w", newline = None)
+file = open("data/test.csv", "w", newline = None)
 csvwrt = csv.writer(file, delimiter = ",")
 
 meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100"]
