@@ -8,7 +8,7 @@ import numpy as np
 file = open("test.csv", "w", newline = None)
 csvwrt = csv.writer(file, delimiter = ",")
 
-meta = ["time", "data"]
+meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100"]
 csvwrt.writerow(meta)
 
 import serial
@@ -21,7 +21,9 @@ pm25 = PM25_UART(uart, reset_pin)
 print("Found PM2.5 sensor, reading data :3...")
 
 now = time.time()
-while (now < now + 30):
+val = 0
+duration = 30 #seconds it runs for
+while (now < now + duration):
     time.sleep(1)
     
     try:
@@ -53,5 +55,7 @@ while (now < now + 30):
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("----------------------------------------")
 
-#for i in range():
-    
+for i in range(duration):
+    csvwrt.writerow([now, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]])
+
+file.close()
