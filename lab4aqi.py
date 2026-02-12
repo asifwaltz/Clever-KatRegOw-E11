@@ -2,10 +2,17 @@ import time
 import board
 import busio 
 from digitalio import DigitalInOut, Direction, Pull
+import csv
+import numpy as np
+
+file = open("test.csv", "w", newline = None)
+csvwrt = csv.writer(file, delimiter = ",")
+
+meta = ["time", "data"]
+csvwrt.writerow(meta)
 
 import serial
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
-
 
 from adafruit_pm25.uart import PM25_UART
 reset_pin = None
@@ -13,7 +20,8 @@ pm25 = PM25_UART(uart, reset_pin)
 
 print("Found PM2.5 sensor, reading data :3...")
 
-while True:
+now = time.time()
+while (now < now + 30):
     time.sleep(1)
     
     try:
@@ -44,3 +52,6 @@ while True:
     print("Particles > 5.0 um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("----------------------------------------")
+
+#for i in range():
+    
