@@ -8,6 +8,7 @@ import sys
 
 args = sys.argv #want arguments for file name and duration
 data_path = "data/" + args[1]
+runtime = int(args[2])
 
 file = open(data_path, "w", newline = None)
 csvwrt = csv.writer(file, delimiter = ",")
@@ -25,8 +26,7 @@ pm25 = PM25_UART(uart, reset_pin)
 print("Found PM2.5 sensor, reading data :3...")
 
 now = time.time()
-duration = args[2] #seconds it runs for
-while (time.time() < now + duration):
+while (time.time() < now + runtime):
     time.sleep(1)
     
     try:
