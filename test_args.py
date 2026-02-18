@@ -6,6 +6,13 @@ import sys
 args = sys.argv
 print(args)
 
+# if len(sys.argv) != 3:
+#     print("Usage: python script.py <filename> <runtime>")
+#     sys.exit(1)
+
+# data_path = sys.argv[1]
+# runtime = int(sys.argv[2])
+
 data_path = "data/" + args[1]
 runtime = int(args[2])
 
