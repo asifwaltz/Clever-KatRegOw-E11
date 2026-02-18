@@ -6,11 +6,11 @@ import csv
 import numpy as np
 import sys
 
-args = sys.argv #want arguments for file name and duration
-data_path = "data/" + args[1]
+args = sys.argv
+dataPath = "data/" + args[1]
 runtime = int(args[2])
 
-file = open(data_path, "w", newline = None)
+file = open(dataPath, "w", newline = None)
 csvwrt = csv.writer(file, delimiter = ",")
 
 meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100", "p03um", "p05um", "p10um", "p25um", "p50um", "p100um"]
@@ -37,6 +37,7 @@ while (time.time() < now + runtime):
 
     csvwriter.writerow([time.ctime(), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"],aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"],aqdata["particles 05um"],aqdata["particles 10um"],aqdata["particles 25um"],aqdata["particles 50um"],aqdata["particles 100um"]])
     
+    print(f"\nTime: {time.ctime()}s")
     print()
     print("Concentration Units (standard)")
     print("----------------------------------------")
@@ -60,8 +61,8 @@ while (time.time() < now + runtime):
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("----------------------------------------")
 
-for i in range(duration):
+for i in range(runtime):
     nownow = time.time()
-    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]) #values not being recorded 
+    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"], aqdata["particles 05um"], aqdata["particles 10um"], aqdata["particles 25um"], aqdata["particles 50um"], aqdata["particles 100um"]])
 
 file.close()
