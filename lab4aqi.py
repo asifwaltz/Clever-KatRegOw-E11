@@ -8,7 +8,7 @@ import numpy as np
 file = open("data/test.csv", "w", newline = None)
 csvwrt = csv.writer(file, delimiter = ",")
 
-meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100"]
+meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100", "p03um", "p05um", "p10um", "p25um", "p50um", "p100um"]
 csvwrt.writerow(meta)
 
 import serial
@@ -21,7 +21,6 @@ pm25 = PM25_UART(uart, reset_pin)
 print("Found PM2.5 sensor, reading data :3...")
 
 now = time.time()
-val = 0
 duration = 30 #seconds it runs for
 while (time.time() < now + duration):
     time.sleep(1)
@@ -31,7 +30,9 @@ while (time.time() < now + duration):
     except RuntimeError:
         print("Unable to read from sensor you idiot. Retrying...")
         continue
-        
+
+    csvwriter.writerow([time.ctime(), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"],aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"],aqdata["particles 05um"],aqdata["particles 10um"],aqdata["particles 25um"],aqdata["particles 50um"],aqdata["particles 100um"]])
+    
     print()
     print("Concentration Units (standard)")
     print("----------------------------------------")
