@@ -33,6 +33,7 @@ while (time.time() < now + duration):
 
     csvwriter.writerow([time.ctime(), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"],aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"],aqdata["particles 05um"],aqdata["particles 10um"],aqdata["particles 25um"],aqdata["particles 50um"],aqdata["particles 100um"]])
     
+    print(f"\nTime: {time.ctime()}s")
     print()
     print("Concentration Units (standard)")
     print("----------------------------------------")
@@ -58,6 +59,6 @@ while (time.time() < now + duration):
 
 for i in range(duration):
     nownow = time.time()
-    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]) #values not being recorded 
+    csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"], aqdata["particles 05um"], aqdata["particles 10um"], aqdata["particles 25um"], aqdata["particles 50um"], aqdata["particles 100um"]])
 
 file.close()
