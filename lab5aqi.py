@@ -1,16 +1,11 @@
 import time
 import board
 import busio 
-from digitalio import DigitalInOut, Direction, Pull
 import csv
+
+from digitalio import DigitalInOut, Direction, Pull
 import numpy as np
 import sys
-
-file = open("data/test.csv", "w", newline = None)
-csvwrt = csv.writer(file, delimiter = ",")
-
-meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100"]
-csvwrt.writerow(meta)
 
 import serial
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
@@ -19,7 +14,13 @@ from adafruit_pm25.uart import PM25_UART
 reset_pin = None
 pm25 = PM25_UART(uart, reset_pin)
 
-print("Found PM2.5 sensor, reading data :3...")
+print("Found PM2.5 sensor, reading data...")
+
+file = open("data/test.csv", "w", newline = None) # file initialization
+csvwrt = csv.writer(file, delimiter = ",")
+
+meta = ["time", "stndr10", "stndr25", "stndr100", "enviro10", "enviro25", "enviro100"]
+csvwrt.writerow(meta)
 
 now = time.time()
 val = 0
@@ -30,9 +31,11 @@ while (time.time() < now + duration):
     try:
         aqdata = pm25.read()
     except RuntimeError:
-        print("Unable to read from sensor you idiot. Retrying...")
+        print("Unable to read from sensor. Retrying...")
         continue
-        
+
+    csvwrt.writerow([time.ctime(), aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]) #values not being recorded
+    
     print()
     print("Concentration Units (standard)")
     print("----------------------------------------")
@@ -59,7 +62,8 @@ while (time.time() < now + duration):
 for i in range(duration):
     nownow = time.time()
     csvwrt.writerow([nownow, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"]]) #values not being recorded 
-
+    # can't you just use ctime()?
+    
 args = sys.argv
 print(args)
 
