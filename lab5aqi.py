@@ -41,8 +41,9 @@ while (time.time() < now + runtime):
     except RuntimeError:
         print("Unable to read from sensor you idiot. Retrying...")
         continue
-    
-    print(f"\nTime: {time.ctime()}s")
+
+	
+	#print(f"\nTime: {time.ctime()}s")
 	print()
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
