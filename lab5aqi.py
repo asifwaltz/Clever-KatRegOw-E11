@@ -34,27 +34,27 @@ print("Found PM2.5 sensor, reading data :3...")
 
 now = time.time()
 while (time.time() < now + runtime):
-	time.sleep(1)
+    time.sleep(1)
+    
+    try:
+        aqdata = pm25.read()
+    except RuntimeError:
+        print("Unable to read from sensor, retrying...")
+        continue
 
-	try:
-		aqdata = pm25.read()
-	except RuntimeError:
-		print("Unable to read from sensor, retrying...")
-		continue
 
-	
-	print(f"\nTime: {time.ctime()}s")
-	print()
-	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
-	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
-	print("Gas: %d ohm" % bme680.gas)
-	print("Humidity: %0.1f %%" % bme680.relative_humidity)
-	print("Pressure: %0.3f hPa" % bme680.pressure)
-	print("Altitude = %0.2f meters" % bme680.altitude)
-	print()
-	print("Concentration Units (standard)")
-	print("----------------------------------------")
-	print(
+    print(f"\nTime: {time.ctime()}s")
+    print()
+    print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
+    print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
+    print("Gas: %d ohm" % bme680.gas)
+    print("Humidity: %0.1f %%" % bme680.relative_humidity)
+    print("Pressure: %0.3f hPa" % bme680.pressure)
+    print("Altitude = %0.2f meters" % bme680.altitude)
+    print()
+    print("Concentration Units (standard)")
+    print("----------------------------------------")
+    print(
         "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
         % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
         )
