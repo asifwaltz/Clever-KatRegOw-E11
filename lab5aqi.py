@@ -44,7 +44,7 @@ while (time.time() < now + runtime):
 
 	
 	#print(f"\nTime: {time.ctime()}s")
-	print()
+	#print()
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
 	print("Gas: %d ohm" % bme680.gas)
