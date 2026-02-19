@@ -53,8 +53,8 @@ while (time.time() < now + runtime):
 	print("Altitude = %0.2f meters" % bme680.altitude)
 	print()
 	print("Concentration Units (standard)")
-    print("----------------------------------------")
-    print(
+	print("----------------------------------------")
+	print(
         "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
         % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
         )
