@@ -34,13 +34,13 @@ print("Found PM2.5 sensor, reading data :3...")
 
 now = time.time()
 while (time.time() < now + runtime):
-    time.sleep(1)
-    
-    try:
-        aqdata = pm25.read()
-    except RuntimeError:
-        print("Unable to read from sensor, retrying...")
-        continue
+	time.sleep(1)
+
+	try:
+		aqdata = pm25.read()
+	except RuntimeError:
+		print("Unable to read from sensor, retrying...")
+		continue
 
 	
 	print(f"\nTime: {time.ctime()}s")
