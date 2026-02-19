@@ -9,7 +9,7 @@ import adafruit_bme680
 
 
 i2c = board.I2C()
-bme680 = adafruit_bme680.Adafruit_BME_I2C(i2c, debug=False)
+bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c, debug=False)
 bme680.sea_level_pressure = 1013.25
 temperature_offset = -5
 
