@@ -74,7 +74,7 @@ while (time.time() < now + runtime):
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("----------------------------------------")
 
-    csvwrt.writerow([nownow, bme680.temperature + temperature_offset, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"], aqdata["particles 05um"], aqdata["particles 10um"], aqdata["particles 25um"], aqdata["particles 50um"], aqdata["particles 100um"]])
+    csvwrt.writerow([time.ctime(), bme680.temperature + temperature_offset, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"], aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"],aqdata["particles 03um"], aqdata["particles 05um"], aqdata["particles 10um"], aqdata["particles 25um"], aqdata["particles 50um"], aqdata["particles 100um"]])
 
 for i in range(runtime):
     nownow = time.time()
