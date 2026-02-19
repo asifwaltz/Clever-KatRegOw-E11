@@ -39,12 +39,12 @@ while (time.time() < now + runtime):
     try:
         aqdata = pm25.read()
     except RuntimeError:
-        print("Unable to read from sensor you idiot. Retrying...")
+        print("Unable to read from sensor, retrying...")
         continue
 
 	
-	#print(f"\nTime: {time.ctime()}s")
-	#print()
+	print(f"\nTime: {time.ctime()}s")
+	print()
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
 	print("\nTemperature: %0.1f C" % (bme680.temperature + temperature_offset))
 	print("Gas: %d ohm" % bme680.gas)
