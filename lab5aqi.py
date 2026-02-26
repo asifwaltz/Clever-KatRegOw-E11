@@ -7,9 +7,9 @@ import numpy as np
 import sys
 import adafruit_bme680
 
-import os
-script_dir = os.path.dirname(os.path.abspath(__file__)) # Get the directory where the script is actually located
-dataPath = os.path.join(script_dir, "data", args[1]) # Join that directory with the "data" folder and your filename
+# import os
+# script_dir = os.path.dirname(os.path.abspath(__file__)) # Get the directory where the script is actually located
+# dataPath = os.path.join(script_dir, "data", args[1]) # Join that directory with the "data" folder and your filename
 
 i2c = board.I2C()
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c, debug=False)
