@@ -2,6 +2,8 @@ import sys
 sys.path.append("/home/pi/Clever-KatRegOw-E11/cape_mca")
 from capemca import *
 
+args = sys.argv
+
 if __name__ == '__main__':
     import sys
     import time
@@ -14,8 +16,15 @@ if __name__ == '__main__':
     if not devices:
         sys.exit(1)
 
-    duration = float(sys.argv[1]) if len(sys.argv) > 1 else 60.0
-    window = float(sys.argv[2]) if len(sys.argv) > 2 else 15.0
+    dataPath = "data/" + args[1]
+    duration = float(args[2]) if len(args) > 2 else 60.0
+    window = float(args[3]) if len(args) > 3 else 15.0
+    
+    file = open(dataPath, "w", newline = None)
+    csvwrt = csv.writer(file, delimiter = ",")
+
+    meta = ["time", "elapsed", "counts", "intervals"]
+    csvwrt.writerow(meta)
 
     spectra = []
     read_times = []
@@ -63,6 +72,8 @@ if __name__ == '__main__':
 
             print(f"\nCompleted {reads} reads in {time.time() - start:.2f}s "
                   f"(window={window}s)")
+            
+            csvwrt.writerow([time.ctime(), elapsed, totalCount, intervals])
 
         except Exception as e:
             print(f"\nError after {reads} reads: {e}")
