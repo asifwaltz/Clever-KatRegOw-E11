@@ -1,6 +1,7 @@
 import sys
 sys.path.append("/home/pi/Clever-KatRegOw-E11/cape_mca")
 from capemca import *
+import csv
 
 args = sys.argv
 
@@ -17,13 +18,14 @@ if __name__ == '__main__':
         sys.exit(1)
 
     dataPath = "data/" + args[1]
-    duration = float(args[2]) if len(args) > 2 else 60.0
-    window = float(args[3]) if len(args) > 3 else 15.0
+    spectraName =  args[2]
+    duration = float(args[3]) if len(args) > 3 else 60.0
+    window = float(args[4]) if len(args) > 4 else 15.0
     
     file = open(dataPath, "w", newline = None)
     csvwrt = csv.writer(file, delimiter = ",")
 
-    meta = ["time", "elapsed", "counts", "intervals"]
+    meta = ["elapsedTime", "cps", "totalCount", "totalInts", "specData"]
     csvwrt.writerow(meta)
 
     spectra = []
@@ -73,7 +75,7 @@ if __name__ == '__main__':
             print(f"\nCompleted {reads} reads in {time.time() - start:.2f}s "
                   f"(window={window}s)")
             
-            csvwrt.writerow([time.ctime(), elapsed, totalCount, intervals])
+            csvwrt.writerow([elapsed, status.cps, status.total_count, status.total_intervals] + spec_data)
 
         except Exception as e:
             print(f"\nError after {reads} reads: {e}")
@@ -108,6 +110,6 @@ if __name__ == '__main__':
         ax2.set_title(f"Summed spectrum ({len(spectra)} reads, {window}s windows)")
 
         plt.tight_layout()
-        plt.savefig("spectra.png", dpi=150)
-        print("Plot saved to spectra.png")
+        plt.savefig(spectraName, dpi=150)
+        print("Plot saved to " + spectraName)
         plt.show()
