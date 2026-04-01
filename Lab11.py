@@ -71,11 +71,11 @@ if __name__ == '__main__':
                 spectra.append(spec_data)
                 read_times.append(elapsed)
                 reads += 1
+                
+                csvwrt.writerow([elapsed, status.cps, status.total_count, status.total_intervals] + spec_data)
 
             print(f"\nCompleted {reads} reads in {time.time() - start:.2f}s "
                   f"(window={window}s)")
-            
-            csvwrt.writerow([elapsed, status.cps, status.total_count, status.total_intervals] + spec_data)
 
         except Exception as e:
             print(f"\nError after {reads} reads: {e}")
